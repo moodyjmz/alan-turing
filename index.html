@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    
+</body>
+<script>
+    const params = new URLSearchParams(document.location.search);
+    const name = params.get('name') || 'Unknown';
+    const codeName = params.get('codename') || 'Unknown';
+    const welcome = document.createElement('div');
+    const header = document.createElement('h1');
+    const headerCodeName = document.createElement('span');
+    header.innerText = `Welcome ${name}`;
+    headerCodeName.innerText = codeName;
+    welcome.append(header);
+    welcome.append(headerCodeName);
+    document.body.append(welcome);
+</script>
+</html>
