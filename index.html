@@ -16,6 +16,8 @@
             font-family: Tahoma, Verdana, sans-serif;
         }
 
+
+
         .validation-wrapper {
             position: relative;
             height: 100vh;
@@ -31,6 +33,18 @@
 
         .validation-lower {
             bottom: 0;
+        }
+
+        .validation-loader {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transition: opacity 0.25s ease-out;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle fill="none" stroke-opacity="1" stroke="%23FFFFFF" stroke-width=".5" cx="100" cy="100" r="0"><animate attributeName="r" calcMode="spline" dur="2" values="1;80" keyTimes="0;1" keySplines="0 .2 .5 1" repeatCount="indefinite"></animate><animate attributeName="stroke-width" calcMode="spline" dur="2" values="0;25" keyTimes="0;1" keySplines="0 .2 .5 1" repeatCount="indefinite"></animate><animate attributeName="stroke-opacity" calcMode="spline" dur="2" values="1;0" keyTimes="0;1" keySplines="0 .2 .5 1" repeatCount="indefinite"></animate></circle></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
         .welcome-wrapper {
@@ -64,6 +78,16 @@
 
         }
 
+        .typed-text {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .authd .validation-loader {
+            opacity: 0;
+        }
+
         .authd .blind {
             height: 0;
         }
@@ -72,11 +96,7 @@
             transform: scale(1);
         }
 
-        .typed-text {
-            display: block;
-            white-space: nowrap;
-            overflow: hidden;
-        }
+
 
         /* Animation */
         .authd .anim-typewriter {
@@ -86,6 +106,7 @@
         .authd .delay-1 {
             animation-delay: 2s;
         }
+
         .authd .delay-2 {
             animation-delay: 3s;
         }
@@ -116,7 +137,6 @@
 
         </div>
         <div class="validation-loader">
-
         </div>
 
     </div>
@@ -127,6 +147,7 @@
     const codeName = params.get('codename') || 'Unknown';
     const welcomeContent = document.querySelector('.welcome-content');
     const validationWrapper = document.querySelector('.validation-wrapper');
+    const validationLoader = document.querySelector('.validation-loader');
     const welcome = document.createElement('div');
     const header = document.createElement('h1');
     const headerCodeName = document.createElement('span');
@@ -145,7 +166,12 @@
         }, delay)
     }
 
-    changeClassAfterDelay(1000, validationWrapper, 'authd');
+    changeClassAfterDelay(6000, validationWrapper, 'authd');
+
+    // make sure css animation gets stopped
+    validationLoader.addEventListener('transitionend', () => {
+        validationLoader.remove();
+    });
 </script>
 
 </html>
