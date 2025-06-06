@@ -1,25 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body,
+        h1 {
+            margin: 0;
+        }
 
+        body {
+            background-color: #000;
+            font-family: Tahoma, Verdana, sans-serif;
+        }
+
+        .validation-wrapper {
+            position: relative;
+            height: 100vh;
+        }
+
+        .blind {
+            position: absolute;
+            width: 100vw;
+            height: 50vh;
+            background: #000;
+            transition: height 2s ease-in-out;
+        }
+
+        .validation-lower {
+            bottom: 0;
+        }
+
+        .welcome-wrapper {
+            position: absolute;
+        }
+
+        .welcome-inner {
+            height: 100vh;
+            width: 100vw;
+            background: no-repeat;
+            background-image: url(./map_blue_dots.webp);
+            background-size: auto 90%;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .welcome-content {
+            height: 50vh;
+            width: 80vw;
+
+            transform: scale(0);
+            transition: transform 1s ease-in-out;
+            transition-delay: 1s;
+            background: rgba(82, 73, 73, 0.4);
+            border-radius: 6px;
+            padding: 20px;
+            color: #fff;
+
+        }
+
+        .authd .blind {
+            height: 0;
+        }
+
+        .authd .welcome-content {
+            transform: scale(1);
+        }
+
+        .typed-text {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        /* Animation */
+        .authd .anim-typewriter {
+            animation: typewriter 2s steps(44) 1s 1 normal both;
+        }
+
+        .authd .delay-1 {
+            animation-delay: 2s;
+        }
+        .authd .delay-2 {
+            animation-delay: 3s;
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div class="validation-wrapper">
+        <div class="welcome-wrapper">
+            <div class="welcome-inner">
+                <div class="welcome-content"></div>
+            </div>
+        </div>
+        <div class="validation-upper blind">
+
+        </div>
+        <div class="validation-lower blind">
+
+        </div>
+        <div class="validation-loader">
+
+        </div>
+
+    </div>
 </body>
 <script>
     const params = new URLSearchParams(document.location.search);
     const name = params.get('name') || 'Unknown';
     const codeName = params.get('codename') || 'Unknown';
+    const welcomeContent = document.querySelector('.welcome-content');
+    const validationWrapper = document.querySelector('.validation-wrapper');
     const welcome = document.createElement('div');
     const header = document.createElement('h1');
     const headerCodeName = document.createElement('span');
-    header.innerText = `Welcome ${name}`;
-    headerCodeName.innerText = codeName;
+
+    header.innerText = `Geheimagent: ${name}`;
+    headerCodeName.innerText = `Deckname: ${codeName}`;
+    header.classList.add('typed-text', 'anim-typewriter', 'delay-1');
+    headerCodeName.classList.add('typed-text', 'anim-typewriter', 'delay-2');
     welcome.append(header);
     welcome.append(headerCodeName);
-    document.body.append(welcome);
+    welcomeContent.append(welcome);
+
+    function changeClassAfterDelay(delay = 1000, target, className) {
+        setTimeout(() => {
+            target.classList.add(className);
+        }, delay)
+    }
+
+    changeClassAfterDelay(1000, validationWrapper, 'authd');
 </script>
+
 </html>
