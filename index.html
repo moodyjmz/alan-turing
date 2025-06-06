@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body,
-        h1 {
+        body {
             margin: 0;
+        }
+
+        h1, h2 {
+            margin: 0 0 5px 0;
         }
 
         body {
@@ -108,7 +111,7 @@
         }
 
         .authd .delay-2 {
-            animation-delay: 3s;
+            animation-delay: 4s;
         }
 
         @keyframes typewriter {
@@ -150,14 +153,22 @@
     const validationLoader = document.querySelector('.validation-loader');
     const welcome = document.createElement('div');
     const header = document.createElement('h1');
-    const headerCodeName = document.createElement('span');
+    const headerContent = document.createElement('p');
+    const headerCodeName = document.createElement('h2');
+    const headerCodeNameContent = document.createElement('p');
 
-    header.innerText = `Geheimagent: ${name}`;
-    headerCodeName.innerText = `Deckname: ${codeName}`;
+    header.innerText = `Geheimagent:`;
+    headerContent.innerText = name;
+    headerCodeName.innerText = `Deckname:`;
+    headerCodeNameContent.innerText = codeName;
     header.classList.add('typed-text', 'anim-typewriter', 'delay-1');
-    headerCodeName.classList.add('typed-text', 'anim-typewriter', 'delay-2');
+    headerContent.classList.add('typed-text', 'anim-typewriter', 'delay-2');
+    headerCodeName.classList.add('typed-text', 'anim-typewriter', 'delay-1');
+    headerCodeNameContent.classList.add('typed-text', 'anim-typewriter', 'delay-2');
     welcome.append(header);
+    welcome.append(headerContent);
     welcome.append(headerCodeName);
+    welcome.append(headerCodeNameContent);
     welcomeContent.append(welcome);
 
     function changeClassAfterDelay(delay = 1000, target, className) {
@@ -166,7 +177,7 @@
         }, delay)
     }
 
-    changeClassAfterDelay(6000, validationWrapper, 'authd');
+    changeClassAfterDelay(500, validationWrapper, 'authd');
 
     // make sure css animation gets stopped
     validationLoader.addEventListener('transitionend', () => {
