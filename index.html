@@ -148,6 +148,7 @@
     const params = new URLSearchParams(document.location.search);
     const name = params.get('name') || 'Unknown';
     const codeName = params.get('codename') || 'Unknown';
+    const title = params.get('title') || 'Geheimagent';
     const welcomeContent = document.querySelector('.welcome-content');
     const validationWrapper = document.querySelector('.validation-wrapper');
     const validationLoader = document.querySelector('.validation-loader');
@@ -157,7 +158,7 @@
     const headerCodeName = document.createElement('h2');
     const headerCodeNameContent = document.createElement('p');
 
-    header.innerText = `Geheimagent:`;
+    header.innerText = `${title}:`;
     headerContent.innerText = name;
     headerCodeName.innerText = `Deckname:`;
     headerCodeNameContent.innerText = codeName;
