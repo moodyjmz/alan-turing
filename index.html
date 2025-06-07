@@ -4,14 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Verifing...</title>
     <style>
         body {
             margin: 0;
         }
 
         h1, h2 {
-            margin: 0 0 5px 0;
+            margin: 0 0 20px 0;
+        }
+
+        h1 {
+            font-size: 1.2rem;
         }
 
         body {
@@ -68,9 +72,12 @@
         }
 
         .welcome-content {
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
             height: 50vh;
             width: 80vw;
-
             transform: scale(0);
             transition: transform 1s ease-in-out;
             transition-delay: 1s;
@@ -81,10 +88,17 @@
 
         }
 
+        .welcome-content-inner {
+
+        }
+
         .typed-text {
             display: block;
             white-space: nowrap;
             overflow: hidden;
+            margin: 0 auto 20px;
+            transform: translateY(-50%);    
+            text-align: center;
         }
 
         .authd .validation-loader {
@@ -103,7 +117,7 @@
 
         /* Animation */
         .authd .anim-typewriter {
-            animation: typewriter 2s steps(44) 1s 1 normal both;
+            animation: typewriter 2s steps(20) 1s 1 normal both;
         }
 
         .authd .delay-1 {
@@ -153,28 +167,26 @@
     const validationWrapper = document.querySelector('.validation-wrapper');
     const validationLoader = document.querySelector('.validation-loader');
     const welcome = document.createElement('div');
+    welcome.classList.add('welcome-content-inner');
     const header = document.createElement('h1');
     const headerCodeName = document.createElement('h2');
-    const headerCodeNameContent = document.createElement('p');
-
+    const welcomeMessage = `Willkommen ${title} ${codeName}`;
     header.innerText = `Willkommen ${title}`;
-    headerCodeName.innerText = `Deckname:`;
-    headerCodeNameContent.innerText = codeName;
+    headerCodeName.innerText = codeName;
     header.classList.add('typed-text', 'anim-typewriter', 'delay-1');
-    headerCodeName.classList.add('typed-text', 'anim-typewriter', 'delay-1');
-    headerCodeNameContent.classList.add('typed-text', 'anim-typewriter', 'delay-2');
+    headerCodeName.classList.add('typed-text', 'anim-typewriter', 'delay-2');
     welcome.append(header);
     welcome.append(headerCodeName);
-    welcome.append(headerCodeNameContent);
     welcomeContent.append(welcome);
 
     function changeClassAfterDelay(delay = 1000, target, className) {
         setTimeout(() => {
             target.classList.add(className);
+            document.title = welcomeMessage;
         }, delay)
     }
 
-    changeClassAfterDelay(5000, validationWrapper, 'authd');
+    changeClassAfterDelay(500, validationWrapper, 'authd');
 
     // make sure css animation gets stopped
     validationLoader.addEventListener('transitionend', () => {
